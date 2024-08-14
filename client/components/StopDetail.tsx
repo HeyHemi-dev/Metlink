@@ -1,21 +1,30 @@
 import { useQuery } from '@tanstack/react-query'
 import { getStopPredictions } from '@/api/stopInfo'
+import { Departure } from '@/models/stopPredictions'
 
 const stopId = 'WATE'
 
 function StopDetail() {
-  const { data, error, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['stop', stopId],
     queryFn: () => getStopPredictions(stopId),
   })
 
-  const stopDepartures = data?.departures
+  let stopDepartures = [] as Departure[]
 
+  if (data) {
+    stopDepartures = data.departures
+  }
+
+  console.log('Stop departures', stopDepartures)
   return (
     <>
-      {stopDepartures?.map((departure, index) => {
-        ;<p key={index}>{departure.origin.name}</p>
-      })}
+      <div>
+        <h2>Predictions</h2>
+        {stopDepartures.map((departure, index) => {
+          return <p key={index}>{departure.origin.name}</p>
+        })}
+      </div>
     </>
   )
 }
