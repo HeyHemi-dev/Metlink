@@ -22,7 +22,7 @@ function StopDetail() {
       <div>
         <h2>Predictions</h2>
         {stopDepartures.map((departure, index) => {
-          return <p key={index}>{departure.origin.name}</p>
+          return <p key={index}>to {departure.destination.name}</p>
         })}
       </div>
     </>
