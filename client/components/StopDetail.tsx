@@ -53,7 +53,7 @@ function StopDetail() {
                       {departure.destination.name}
                     </TableCell>{' '}
                     <TableCell>{departure.direction}</TableCell>
-                    <TableCell>{departure.arrival.aimed as string}</TableCell>
+                    <TableCell>{`${departure.arrival.aimed}`}</TableCell>
                     <TableCell>{departure.status}</TableCell>
                     <TableCell>{departure.delay}</TableCell>
                     <TableCell className="text-right">

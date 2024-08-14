@@ -7,9 +7,6 @@ export default router
 
 const metlinkPath = 'https://api.opendata.metlink.org.nz/v1'
 
-// curl
-// -X GET "https://api.opendata.metlink.org.nz/v1/stop-predictions?stop_id=WATE"
-
 router.get('/predictions', async (req, res) => {
   console.log(req.query.stop_id)
   try {
