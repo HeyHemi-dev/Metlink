@@ -14,12 +14,21 @@ import {
 const stopId = 'WATE'
 
 function StopDetail() {
-  const { data } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['stop', stopId],
     queryFn: () => getStopPredictions(stopId),
   })
 
+  let tableCaption = 'Up-coming departures'
   let stopDepartures = [] as Departure[]
+
+  if (isLoading) {
+    tableCaption = 'Loading departures'
+  }
+
+  if (isError) {
+    tableCaption = 'Error loading data, please refresh'
+  }
 
   if (data) {
     stopDepartures = data.departures
@@ -31,7 +40,7 @@ function StopDetail() {
       <div>
         <h2>Departures for {stopId}</h2>
         <Table>
-          <TableCaption>Up-coming departures</TableCaption>
+          <TableCaption>{tableCaption}</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]">Service</TableHead>
@@ -51,7 +60,7 @@ function StopDetail() {
                     <TableCell>{departure.service_id}</TableCell>
                     <TableCell className="font-medium">
                       {departure.destination.name}
-                    </TableCell>{' '}
+                    </TableCell>
                     <TableCell>{departure.direction}</TableCell>
                     <TableCell>{`${departure.arrival.aimed}`}</TableCell>
                     <TableCell>{departure.status}</TableCell>
