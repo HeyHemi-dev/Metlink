@@ -8,7 +8,7 @@ server.use(express.json())
 server.use(cors('*' as CorsOptions))
 
 //routes
-server.use('api/v1/metlink/', metlink)
+server.use('/api/v1/metlink/', metlink)
 
 //build
 
