@@ -17,5 +17,6 @@ router.get('/predictions', async (req, res) => {
     res.json(response.body)
   } catch (error: unknown) {
     console.error(error)
+    res.json(error)
   }
 })
