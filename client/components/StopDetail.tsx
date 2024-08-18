@@ -20,6 +20,7 @@ function StopDetail() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['stop', stopId],
     queryFn: () => getStopPredictions(stopId as string),
+    staleTime: 60000,
   })
 
   let tableCaption = 'Up-coming departures'
