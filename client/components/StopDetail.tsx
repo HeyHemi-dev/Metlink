@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
 import { getStopPredictions } from '@/api/stopInfo'
-//import { Departure } from '@/models/stopPredictions'
 import { useParams } from 'react-router-dom'
 import {
   Table,

@@ -59,3 +59,7 @@ export interface Route {
   route_url: string
   route_sort_order: number
 }
+
+export interface RouteStops extends Route {
+  stops: Stop[]
+}
