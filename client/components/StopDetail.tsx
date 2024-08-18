@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getStopPredictions } from '@/api/stopInfo'
-import { Departure } from '@/models/stopPredictions'
+//import { Departure } from '@/models/stopPredictions'
+import { useParams } from 'react-router-dom'
 import {
   Table,
   TableBody,
@@ -11,16 +12,17 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-const stopId = 'WATE'
+//const stopId = 'WATE'
 
 function StopDetail() {
+  const { stopId } = useParams()
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['stop', stopId],
-    queryFn: () => getStopPredictions(stopId),
+    queryFn: () => getStopPredictions(stopId as string),
   })
 
   let tableCaption = 'Up-coming departures'
-  let stopDepartures = [] as Departure[]
 
   if (isLoading) {
     tableCaption = 'Loading departures'
@@ -30,11 +32,9 @@ function StopDetail() {
     tableCaption = 'Error loading data, please refresh'
   }
 
-  if (data) {
-    stopDepartures = data.departures
-  }
+  const departurePredictions = data?.departures
 
-  console.log('Stop departures', stopDepartures)
+  //console.log('Departure predictions', departurePredictions)
   return (
     <>
       <div>
@@ -53,10 +53,10 @@ function StopDetail() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {stopDepartures.map((departure, index) => {
-              return (
-                <>
-                  <TableRow key={index}>
+            {departurePredictions !== undefined &&
+              departurePredictions.map((departure) => {
+                return (
+                  <TableRow key={departure.trip_id}>
                     <TableCell>{departure.service_id}</TableCell>
                     <TableCell className="font-medium">
                       {departure.destination.name}
@@ -69,9 +69,8 @@ function StopDetail() {
                       {departure.wheelchair_accessible}
                     </TableCell>
                   </TableRow>
-                </>
-              )
-            })}
+                )
+              })}
           </TableBody>
         </Table>
       </div>

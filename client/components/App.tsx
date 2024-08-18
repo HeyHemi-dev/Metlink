@@ -1,6 +1,6 @@
+import { Outlet } from 'react-router-dom'
 import Header from './Header.tsx'
 import Footer from './Footer.tsx'
-import StopDetail from './StopDetail.tsx'
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
           <Header />
         </header>
         <main className="row-start-2 row-end-3 flex flex-col">
-          <StopDetail />
+          <Outlet />
         </main>
         <footer>
           <Footer />
